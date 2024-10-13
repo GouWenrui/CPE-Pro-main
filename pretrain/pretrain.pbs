@@ -1,0 +1,24 @@
+#PBS -q xxx
+#PBS -l xxx
+#PBS -l xxx
+#PBS -N sslm_pretrain
+#PBS -o /pretrain_log
+#PBS -e /pretrain_log
+
+cd CPE-Pro-main
+conda activate cpe-pro
+python pretrain.py --model_path /sslm \
+                    --struc_seq_file swissprot_plddt>0.955_struct_seq.fasta \
+                    --use_token_statistics False \
+                    --max_length 256 \
+                    --sampling_num '{"train": 98400, "valid": 5460, "test": 5460}' \
+                    --num_workers 4 \
+                    --mlm_method '{"mlm_probability": 0.25, "mask_radio": 0.9, "random_radio": 0.0}' \
+                    --batch_size 64 \
+                    --lr 5e-4 \
+                    --epochs 50 \
+                    --patience 5 \
+                    --indicator_larger \
+                    --device cuda \
+                    --seed 3407 \
+                    --save_model

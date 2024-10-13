@@ -1,0 +1,25 @@
+#PBS -q xxx
+#PBS -l xxx
+#PBS -l xxx
+#PBS -N predict
+#PBS -o /predict_log
+#PBS -e /predict_log
+
+zsh
+source ~/.zshrc
+cd /home/tanyang/R_R/CPE-Pro/predict
+conda activate protein
+
+python predict.py \
+    --foldseek /foldseek \
+    --model_weight_path checkpoint/CPEPro_4_29.0M_0.25-9-0-1.pth \
+    --sslm_dir /home/tanyang/R_R/sslm/0.25-9-0-1 \
+    --sequence_max_length 256 \
+    --linear_dropout 0.15 \
+    --num_classes 4 \
+    --label2Class '{0: "CRYSTAL", 1: "ALPHAFOLD", 2: "OMEGAFOLD", 3: "ESMFOLD"}' \
+    --num_workers 4 \
+    --device cuda \
+    --atten_pooling \
+    --file_path /source/case_study/BLAT_ECOLX \
+    --output_file /source/case_study/BLAT_ECOLX/log.txt

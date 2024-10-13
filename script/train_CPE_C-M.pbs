@@ -1,0 +1,42 @@
+#PBS -q xxx
+#PBS -l xxx
+#PBS -l xxx
+#PBS -N model_train
+#PBS -o /train_log
+#PBS -e /train_log
+
+cd CPE-Pro-main
+conda activate cpe-pro
+python src/train.py \
+    --use_sslm \
+    --use_gvp \
+    --sampling_num '{"train": 20000, "valid": 2000, "test": 2000}' \
+    --process_id 7 \
+    --batch_size 64 \
+    --num_workers 4 \
+    --foldseek /foldseek \
+    --label_mapping '{"crystal": 0, "alphafold": 1, "omegafold": 2, "esmfold": 3}' \
+    --file_path /CPE-Pro-dataset/C-M_pdb/ \
+    --num_classes 4 \
+    --linear_dropout 0.25 \
+    --seed 3407 \
+    --device cuda \
+    --epoch 100 \
+    --lr 0.0001 \
+    --early_stop_patience 5 \
+    --indicator_larger \
+    --gradient_accumulation_steps 1 \
+    --save_trained_model \
+    --top_k_neighbors 3 \
+    --node_hidden_dim_scalar 128 \
+    --node_hidden_dim_vector 128 \
+    --edge_hidden_dim_scalar 128 \
+    --edge_hidden_dim_vector 128 \
+    --num_encoder_layers 3 \
+    --dropout 0.1 \
+    --embed_gvp_output_dim 128 \
+    --aa_max_len 256 \
+    --load_pretrained \
+    --sslm_dir /sslm/0.25-9-0-1 \
+    --sequence_max_length 256 \
+    --atten_pooling
