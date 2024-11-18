@@ -73,5 +73,13 @@ The information about the model's weight files can be found in the `source` fold
 Please cite our work if you have used our code or data.
 
 ```
-xxxx
+@misc{gou2024cpeprostructuresensitivedeeplearning,
+      title={CPE-Pro: A Structure-Sensitive Deep Learning Method for Protein Representation and Origin Evaluation}, 
+      author={Wenrui Gou and Wenhui Ge and Yang Tan and Mingchen Li and Guisheng Fan and Huiqun Yu},
+      year={2024},
+      eprint={2410.15592},
+      archivePrefix={arXiv},
+      primaryClass={q-bio.BM},
+      url={https://arxiv.org/abs/2410.15592}, 
+}
 ```
